@@ -4,7 +4,7 @@
       <div class = "avatar_box">
         <img src="../assets/avatar.gif">
       </div>
-      <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-width="80px" class="login_Form">
+      <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-width="70px" class="login_Form">
         <el-form-item label="公司ID:" prop="companyId">
           <el-input v-model="loginForm.companyId" prefix-icon="el-icon-suitcase"></el-input>
         </el-form-item>
@@ -12,7 +12,7 @@
           <el-input v-model="loginForm.account" prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>
         <el-form-item label="密    码:" prop="password">
-          <el-input v-model="loginForm.password" prefix-icon="el-icon-lock"></el-input>
+          <el-input type="password" v-model="loginForm.password" prefix-icon="el-icon-lock"></el-input>
         </el-form-item>
         <el-form-item class = "login_btn">
           <el-button type="primary" @click="submitForm('loginForm')">登  录</el-button>
@@ -53,7 +53,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          this.$router.push("/main")
         } else {
           console.log('error submit!!');
           return false;
@@ -68,6 +68,10 @@ export default {
 </script>
 
 <style scoped>
+  .login_btn{
+    display: flex;
+    justify-content: flex-end;
+  }
   .login_container{
     height: 100%;
     background-color: #2c3e50;
