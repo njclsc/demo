@@ -20,7 +20,42 @@
         </div>
       </el-header>
       <el-container>
-        <el-aside width="200px">Aside</el-aside>
+        <el-aside :width="isCollapse?'60px':'200px'">
+          <!-- 展开收起-->
+          <div class = "toggle_box" @click="toggleCollapse">|||</div>
+          <el-menu
+            default-active="2"
+            class="el-menu-vertical-demo"
+            @open="handleOpen"
+            @close="handleClose"
+            background-color="#2c3e50"
+            text-color="#fff"
+            active-text-color="#ffd04b"
+            :collapse="isCollapse"
+            :collapse-transition="false"
+            :unique-opened="true">
+            <el-submenu index = "1">
+              <template slot = "title">
+                <i class="el-icon-location"></i>
+                <span>定位区域</span>
+              </template>
+              <el-menu-item index = "1-1">
+                <i class="el-icon-location"></i>
+                <span slot = "title">定位区域一</span>
+              </el-menu-item>
+            </el-submenu>
+            <el-submenu index = "2">
+              <template slot = "title">
+                <i class="el-icon-location"></i>
+                <span>定位区域</span>
+              </template>
+              <el-menu-item index = "2-1">
+                <i class="el-icon-location"></i>
+                <span slot = "title">定位区域一</span>
+              </el-menu-item>
+            </el-submenu>
+          </el-menu>
+        </el-aside>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
@@ -28,7 +63,17 @@
 
 <script>
 export default {
-name: "Main"
+  name: "Main",
+  data(){
+    return{
+      isCollapse: false
+    }
+  },
+  methods:{
+    toggleCollapse(){
+      this.isCollapse = !this.isCollapse;
+    }
+  }
 }
 </script>
 
@@ -41,20 +86,47 @@ name: "Main"
     display: flex;
     justify-content: space-between;
     padding-left: 0;
-    color: #333;
+    color: #ffffff;
     align-items: center;
     font-size: 20px;
     .left_box {
       display: flex;
       align-items: center;
+      img{
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+      }
+      span{
+        margin-left: 15px;
+      }
+    }
+    .right_box {
+      .el-dropdown > img{
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        background-color: #05020f;
+      }
     }
   }
-
+ 
   .el-aside {
-    background-color: #D3DCE6;
+    background-color: #2c3e50;
     color: #333;
-    text-align: center;
-    line-height: 200px;
+      .el-menu{
+        border-right: none;
+      }
+     .toggle_box{
+       background-color: #2c3e50;
+       font-size: 15px;
+       font-weight: bold;
+       line-height: 25px;
+       color: #ffffFF;
+       letter-spacing: 0.5em;
+       text-align: center;
+       cursor: pointer;
+    }
   }
 
   .el-main {
